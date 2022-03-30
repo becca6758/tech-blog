@@ -1,4 +1,3 @@
-const sequelize = require('../config/connection');
 const { Post, User, Comment} = require('../models');
 const router = require('express').Router();
 
@@ -26,7 +25,7 @@ router.get('/', (req, res) => {
     })
     .then(dbPostData => {
         const posts = dbPostData.map(post => post.get({ plain: true}));
-        res.render('hompage', {posts, loggedIn: req.session.loggedIn});
+        res.render('hompage', {posts});
     })
     .catch(err => {
         console.log(err);
