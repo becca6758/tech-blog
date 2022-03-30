@@ -26,13 +26,14 @@ const PORT = process.env.PORT ||3003;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(_dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(session(sess));
 
 
 app.use("/", controller);
 
-app.engine("handlebars",exphbs());
+const hbs = exphbs.create({});
+app.engine("handlebars",hbs.engine);
 app.set("view engine", "handlebars");
 
 sequelize.sync({force: false}).then(() => {
