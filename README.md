@@ -21,7 +21,7 @@ To install the project follow the steps listed below:
 ## Usage
 
 To use this application follow the directions below:
-1. Navigate https://wk14-mvc-tech-blog.herokuapp.com/  
+1. Navigate https://wk14-mvc-tech-hblog.herokuapp.com/  
 2. Either login or sign up to the website
 3. To start on a quiz right away either choose on one of the quizzes displayed on the home page or navigate to "Categories" and choose a quiz from there after selecting a desired category.
 4. Complete the quiz and view your score.
