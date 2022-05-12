@@ -1,20 +1,22 @@
-const {Post} = require('../models');
+const { Post } = require('../models');
 
 const postData = [{
-    title: 'Coding Languages',
-    content: 'There are currently around 700 programming languages',
-    user_id: 1
-},
-{
-    title: 'Computer Programmer',
-    content: 'The worlds first programmer was a woman',
-    user_id: 2
-},
-{
-    title: 'Virus',
-    content: 'The first computer virus was created in 1986',
-    user_id: 3
-}];
+        title: 'Lorem Ipsum I',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        user_id: 1
+
+    },
+    {
+        title: 'Lorem Ipsum II',
+        content: 'Amet aliquam id diam maecenas ultricies mi eget mauris pharetra.',
+        user_id: 2
+    },
+    {
+        title: 'Lorem Ipsum III',
+        content: 'Ut etiam sit amet nisl purus in mollis.',
+        user_id: 3
+    }
+];
 
 const seedPosts = () => Post.bulkCreate(postData);
 
