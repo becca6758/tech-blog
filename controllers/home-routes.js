@@ -1,8 +1,6 @@
 const router = require('express').Router();
-
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
-
 
 router.get('/', (req, res) => {
     console.log(req.session);
@@ -12,7 +10,7 @@ router.get('/', (req, res) => {
         'id',
         'title',
         'created_at',
-        'content'
+        'post_content'
       ],
       include: [
         {
@@ -20,12 +18,12 @@ router.get('/', (req, res) => {
           attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
-            attributes: ['username']
+            attributes: ['username', 'twitter', 'github']
           }
         },
         {
           model: User,
-          attributes: ['username']
+          attributes: ['username', 'twitter', 'github']
         }
       ]
     })
@@ -51,7 +49,7 @@ router.get('/login', (req, res) => {
     res.render('login');
   });
 
-router.get('/signup', (req, res) => {
+  router.get('/signup', (req, res) => {
     if (req.session.loggedIn) {
       res.redirect('/');
       return;
@@ -60,7 +58,7 @@ router.get('/signup', (req, res) => {
     res.render('signup');
   });
 
-router.get('/post/:id', (req, res) => {
+  router.get('/post/:id', (req, res) => {
     Post.findOne({
       where: {
         id: req.params.id
@@ -69,20 +67,20 @@ router.get('/post/:id', (req, res) => {
         'id',
         'title',
         'created_at',
-        'content'
+        'post_content'
       ],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 'user_id', ''],
+          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
-            attributes: ['username']
+            attributes: ['username', 'twitter', 'github']
           }
         },
         {
           model: User,
-          attributes: ['username']
+          attributes: ['username', 'twitter', 'github']
         }
       ]
     })
@@ -92,8 +90,10 @@ router.get('/post/:id', (req, res) => {
           return;
         }
   
+        // serialize the data
         const post = dbPostData.get({ plain: true });
   
+        // pass data to template
         res.render('single-post', {
             post,
             loggedIn: req.session.loggedIn
